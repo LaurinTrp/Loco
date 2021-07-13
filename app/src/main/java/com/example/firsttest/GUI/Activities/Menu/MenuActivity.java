@@ -276,6 +276,7 @@ public class MenuActivity extends AppCompatActivity {
             }else{
                 editText.getBackground().mutate().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.lightGreen), PorterDuff.Mode.SRC_ATOP);
             }
+            //Test
         }
     }
 
