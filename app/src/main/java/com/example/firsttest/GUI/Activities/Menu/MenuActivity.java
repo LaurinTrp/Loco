@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -26,6 +24,8 @@ import com.example.firsttest.GUI.Activities.MapsActivity;
 import com.example.firsttest.LoadSave;
 import com.example.firsttest.R;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -38,19 +38,23 @@ public class MenuActivity extends AppCompatActivity {
     private Switch switch_bio;
     private HashMap<Switch, String> hashMap = new HashMap<>();
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menu1);
 
         switch_bio = findViewById(R.id.switch_bio);
 
         getWidgets();
 
-        Button b = (Button) findViewById(R.id.filterButton);
         Context context = getApplicationContext();
-        b.setOnClickListener(new View.OnClickListener() {
+
+        LoadSave.MENU.showSaved(context);
+
+        Button submit = (Button) findViewById(R.id.submitButton);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -61,7 +65,7 @@ public class MenuActivity extends AppCompatActivity {
                         clean = false;
                     }
                 }
-
+                
                 if(clean){
                     filter();
                     finish();
@@ -69,6 +73,15 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+
+        Button saveTemplate = (Button) findViewById(R.id.saveTemplateButton);
+        saveTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadSave.MENU.saveMenu(context, "test");
+            }
+        });
+
     }
 
     @SuppressLint("NewApi")
@@ -216,6 +229,12 @@ public class MenuActivity extends AppCompatActivity {
             }else if(type == EditTextTypes.CompanyName.id){
 
             }else if(type == EditTextTypes.Location.id){
+
+                String[] location = excelObject.getLocation().split(", ");
+                String toCheck = location[location.length-1].toLowerCase();
+
+                bool = toCheck.contains(currentEditText.getText().toString());
+                Log.d("CHECKLOC", "checkContentEditText: " + bool);
 
             }else{}
 

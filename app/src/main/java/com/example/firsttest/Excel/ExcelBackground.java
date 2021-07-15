@@ -59,7 +59,6 @@ public class ExcelBackground extends Thread implements Runnable{
 
                 inputStream = assetManager.open("Table.xls");
                 ExcelReader.readExcel(activity, inputStream);
-                LoadSave.save(context);
 
             } catch (IOException ioException) {
                 ioException.printStackTrace();

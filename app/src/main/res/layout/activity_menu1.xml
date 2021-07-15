@@ -8,7 +8,21 @@
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/loacation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="minLength:1;maxLength:42;type:2;"
+        android:cursorVisible="true"
+        android:ems="10"
+        android:hint="Stadt"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textCursorDrawable="@drawable/cursorwhite"
+        app:backgroundTint="@color/lightGreen" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/PLZ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -30,11 +44,19 @@
         android:textColorHighlight="@color/lightGreen" />
 
     <Button
-        android:id="@+id/filterButton"
+        android:id="@+id/submitButton"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="50dp"
         android:text="Submit" />
+
+    <Button
+        android:id="@+id/saveTemplateButton"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:text="Save as template" />
 
 </LinearLayout>
